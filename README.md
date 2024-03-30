@@ -1,9 +1,7 @@
-# 🐛 UPDATED and FIXED Code for my Complete JavaScript Course
+# Complete JavaScript Course by Jonas Schmedtmann
 
-The _master_ branch in this repo contains the code **exactly** as shown in the course videos. However, some parts of the code contain small bugs or need updates. That's what _this_ branch is for.
+This repo is a copy of the updates-and-fixes branch of Jonas Schmedtmann's Complete JavaScript Course for my personal use. Additionally, it contains some of my own code and notes for most sections of the course (but not all sections, since I skipped some of them).
 
-**This branch will be kept up-to-date over time with latest package updates and important bugfixes 🐛**
+You can find the original repo here: [complete-javascript-course](https://github.com/jonasschmedtmann/complete-javascript-course)
 
-So if you have any problem with the code in one of the course sections, check out the final code in this branch. Note that only folders with the 🐛 icon in the commit message have seen an update.
-
-Happy coding! ✌️
+Also, you can take this course on Udemy: [The Complete JavaScript Course 2024: From Zero to Expert!](https://www.udemy.com/course/the-complete-javascript-course/)
