@@ -63,3 +63,33 @@ console.log(jonas.species); // Homo Sapiens
 // from the prototype chain.
 console.log(jonas.hasOwnProperty('firstName')); // true
 console.log(jonas.hasOwnProperty('species')); // false
+
+/* ---- Prototypal Inheritance on Built-In Objects ------------------------------------- */
+console.log(jonas.__proto__);
+// The Object.prototype (the top of the prototype chain)
+console.log(jonas.__proto__.__proto__);
+// There's nothing after the end of the prototype chain, so it returns null
+console.log(jonas.__proto__.__proto__.__proto__);
+
+console.dir(Person.prototype.constructor); // Returns the Person constructor function
+
+// Every object in JavaScript has its own prototype chain, and arrays are not exception
+const arr = [1, 2, 2, 3, 3, 4, 4, 5]; // new Array() === []
+console.log(arr.__proto__);
+console.log(arr.__proto__ === Array.prototype); // true
+
+console.log(arr.__proto__.__proto__); // returns Object.prototype
+
+// Knowing that all arrays inherit its methods from Array.prototype, we can use it to
+// extend the functionality of arrays. It's not recommended to do this, since a new
+// version of JavaScript can break this functionality.
+Array.prototype.unique = function () {
+  return [...new Set(this)];
+};
+console.log(arr.unique()); // [ 1, 2, 3, 4, 5 ]
+
+// Exploring the prototype chain of HTML elements
+const h1 = document.querySelector('h1');
+console.dir(h1); // returns all properties and methods of this html element
+// Functions also have their own prototype chain
+console.dir(x => x + 1);
