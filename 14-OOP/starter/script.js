@@ -32,3 +32,34 @@ console.log(matilda, jack);
 console.log(jack instanceof Person); // true
 const jay = 'Jay';
 console.log(jay instanceof Person); // false
+
+/* ---- Prototypes --------------------------------------------------------------------- */
+// We can set methods in the prototype
+Person.prototype.calcAge = function () {
+  console.log(2037 - this.birthYear);
+};
+
+// All instances of the Person constructor now have access to the calcAge method because
+// it was defined in its prototype. The Person constructor delegated this functionality to
+// the prototype from which it inherits.
+console.log(Person.prototype);
+jonas.calcAge();
+matilda.calcAge();
+
+// We can confirm that each object inherits from Person.prototype
+console.log(jonas.__proto__);
+console.log(jonas.__proto__ === Person.prototype); // true
+console.log(Person.prototype.isPrototypeOf(jonas)); // true
+
+// IMPORTANT: Person.prototype is not the prototype of the Person constructor function.
+// Instead, it's the prototype to which the instances of Person will be linked.
+console.log(Person.prototype.isPrototypeOf(Person)); // false
+
+// We can also set properties in the prototype
+Person.prototype.species = 'Homo Sapiens';
+console.log(jonas.species); // Homo Sapiens
+
+// The "species" property it's not part of the object itself, but it's inherited
+// from the prototype chain.
+console.log(jonas.hasOwnProperty('firstName')); // true
+console.log(jonas.hasOwnProperty('species')); // false
