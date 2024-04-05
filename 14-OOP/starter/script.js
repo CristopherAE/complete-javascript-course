@@ -147,7 +147,7 @@ Person.prototype.greet = function () {
 jessica.greet(); // Hello, Jessica!
 */
 
-/* ---- Setters and Getters ------------------------------------------------------------ */
+/* ---- Setters and Getters ------------------------------------------------------------
 // Every object in JavaScript can have setters and getters properties. This special
 // properties are called "accessor properties", while the more normal kind of properties are
 // called "data properties".
@@ -208,3 +208,48 @@ console.log(jessica);
 console.log(jessica.age); // 41
 
 const walter = new Person('Walter White', 1965);
+*/
+
+/* ---- Static Methods ----------------------------------------------------------------- */
+class Person {
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
+    this.birthYear = birthYear;
+  }
+
+  // The "calcAge" and "greet" methods are called instance methods, because they will be added
+  // to the Person.prototype property when we create an instance of this class.
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  }
+
+  greet() {
+    console.log(`Hello, ${this.firstName}!`);
+  }
+
+  get age() {
+    return 2037 - this.birthYear;
+  }
+
+  set fullName(name) {
+    if (name.includes(' ')) this._fullName = name;
+    else console.log(`${name} is not a full name!`);
+  }
+
+  get fullName() {
+    return this._fullName;
+  }
+
+  // Static methods are methods that are attached to the class itself but not to the instances of a
+  // class. Examples of this are Number.parseFloat() and Array.from().
+  // We can create a static method outside of a class like this (notice that we don't use
+  // Person.prototype):
+  // Person.hey = function () {}
+  // Or, if we are inside of a ES6 class, we can create a static method using the "static" keyword
+  static hey() {
+    console.log('Hey there!');
+  }
+}
+
+// We shouldn't create an instance of the class to call a static method
+Person.hey();
