@@ -1,6 +1,6 @@
 'use strict';
 
-/* ---- Constructor Functions and the new Operator ------------------------------------- */
+/* ---- Constructor Functions and the new Operator -------------------------------------
 // We can create constructor functions with function declarations or funtion expressions, but
 // not with arrow functions, because arrow functions doesn't have a "this" keyword defined.
 const Person = function (firstName, birthYear) {
@@ -32,8 +32,9 @@ console.log(matilda, jack);
 console.log(jack instanceof Person); // true
 const jay = 'Jay';
 console.log(jay instanceof Person); // false
+*/
 
-/* ---- Prototypes --------------------------------------------------------------------- */
+/* ---- Prototypes ---------------------------------------------------------------------
 // We can set methods in the prototype
 Person.prototype.calcAge = function () {
   console.log(2037 - this.birthYear);
@@ -63,8 +64,9 @@ console.log(jonas.species); // Homo Sapiens
 // from the prototype chain.
 console.log(jonas.hasOwnProperty('firstName')); // true
 console.log(jonas.hasOwnProperty('species')); // false
+*/
 
-/* ---- Prototypal Inheritance on Built-In Objects ------------------------------------- */
+/* ---- Prototypal Inheritance on Built-In Objects -------------------------------------
 console.log(jonas.__proto__);
 // The Object.prototype (the top of the prototype chain)
 console.log(jonas.__proto__.__proto__);
@@ -93,3 +95,53 @@ const h1 = document.querySelector('h1');
 console.dir(h1); // returns all properties and methods of this html element
 // Functions also have their own prototype chain
 console.dir(x => x + 1);
+*/
+
+/* ---- ES6 Classes -------------------------------------------------------------------- */
+// The implementation of classes in JavaScript is only syntactic sugar over the use of
+// constructor functions and prototypal inheritance.
+
+// Important considerations when using ES6 classes:
+//  1. Classes are not hoisted; we can't use a class before it is declared in our code.
+//  2. Classes are first-class citizens; we can pass them into functions and return them
+//  from other functions.
+//  3. The body of a class it's always executed in strict mode, even if we didn't put
+//  'use strict' at the start of our JavaScript file.
+
+// There are two ways of defining classes: class expressions and class declarations. This is
+// because classes are a special type of function in JavaScript.
+
+// Class expression:
+// const Person = class {};
+
+// Class declaration:
+class Person {
+  // This constructor will be called automatically everytime we create a new instance of
+  // this class. Behind the scenes, it's essentialy the same as the constructor function
+  // that we used before to define a class.
+  constructor(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  }
+
+  // In ES6 classes we don't need to attach the methods to the prototype chain. This will
+  // happen automatically for us.
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  }
+}
+
+const jessica = new Person('Jessica', 1996);
+console.log(jessica);
+jessica.calcAge();
+
+// We see that the prototype chain still exists, but now it's JavaScript that handles the
+// linking of our methods to the prototype chain.
+console.log(jessica.__proto__ == Person.prototype); // true
+
+// We can still add methods to the prototype itself and they will work as expected.
+Person.prototype.greet = function () {
+  console.log(`Hello, ${this.firstName}!`);
+};
+
+jessica.greet(); // Hello, Jessica!
