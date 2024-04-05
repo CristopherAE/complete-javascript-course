@@ -97,7 +97,7 @@ console.dir(h1); // returns all properties and methods of this html element
 console.dir(x => x + 1);
 */
 
-/* ---- ES6 Classes -------------------------------------------------------------------- */
+/* ---- ES6 Classes --------------------------------------------------------------------
 // The implementation of classes in JavaScript is only syntactic sugar over the use of
 // constructor functions and prototypal inheritance.
 
@@ -145,3 +145,66 @@ Person.prototype.greet = function () {
 };
 
 jessica.greet(); // Hello, Jessica!
+*/
+
+/* ---- Setters and Getters ------------------------------------------------------------ */
+// Every object in JavaScript can have setters and getters properties. This special
+// properties are called "accessor properties", while the more normal kind of properties are
+// called "data properties".
+
+const account = {
+  owner: 'Jonas',
+  movements: [200, 530, 120, 300],
+
+  get latest() {
+    return this.movements.slice(-1).pop();
+  },
+
+  set latest(movement) {
+    this.movements.push(movement);
+  },
+};
+
+console.log(account.latest); // 300
+
+account.latest = 50;
+console.log(account.movements);
+
+// We can also use getters and setter in classes
+class Person {
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
+    this.birthYear = birthYear;
+  }
+
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  }
+
+  greet() {
+    console.log(`Hello, ${this.firstName}!`);
+  }
+
+  get age() {
+    return 2037 - this.birthYear;
+  }
+
+  // We should follow a pattern similar to this when we want to set a property that already exists.
+  // We should create both a setter and a getter, and put a underscore before the name of the property
+  // that we want to change (otherwise the name will be in conflict with the property name that we
+  // defined in the constuctor).
+  set fullName(name) {
+    if (name.includes(' ')) this._fullName = name;
+    else console.log(`${name} is not a full name!`);
+  }
+
+  get fullName() {
+    return this._fullName;
+  }
+}
+
+const jessica = new Person('Jessica Davis', 1996);
+console.log(jessica);
+console.log(jessica.age); // 41
+
+const walter = new Person('Walter White', 1965);
