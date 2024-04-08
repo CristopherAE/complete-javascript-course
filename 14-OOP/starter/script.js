@@ -210,7 +210,7 @@ console.log(jessica.age); // 41
 const walter = new Person('Walter White', 1965);
 */
 
-/* ---- Static Methods ----------------------------------------------------------------- */
+/* ---- Static Methods -----------------------------------------------------------------
 class Person {
   constructor(fullName, birthYear) {
     this.fullName = fullName;
@@ -253,3 +253,30 @@ class Person {
 
 // We shouldn't create an instance of the class to call a static method
 Person.hey();
+*/
+
+/* ---- Object.create ------------------------------------------------------------------ */
+// This is a third way of implementing prototypal inheritance
+const PersonProto = {
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  },
+  // This is NOT a constructor function, it just makes it easier to initialize the
+  // properties of an object
+  init(name, birthYear) {
+    this.name = name;
+    this.birthYear = birthYear;
+  },
+};
+
+const steven = Object.create(PersonProto);
+// console.log(steven);
+steven.name = 'Steven';
+steven.birthYear = 2002;
+steven.calcAge();
+
+console.log(steven.__proto__ === PersonProto); // true
+
+const sarah = Object.create(PersonProto);
+sarah.init('Sarah', 1979);
+sarah.calcAge();
